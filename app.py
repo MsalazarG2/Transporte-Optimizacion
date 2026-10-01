@@ -243,27 +243,26 @@ if st.button(
         pulp.LpMinimize
     )
 
-    # Variables
-x = pulp.LpVariable.dicts(
-    "x",
-    [
-        (i, j)
-        for i in centros
-        for j in hospitales
-    ],
-    lowBound=0,
-    cat="Continuous"
+    # Variables de decisión
+x = {}
+
+for i in centros:
+    for j in hospitales:
+        x[(i, j)] = pulp.LpVariable(
+            f"x_{i}_{j}",
+            lowBound=0,
+            cat="Continuous"
+        )
+
+# ------------------------------------------------------
+# FUNCIÓN OBJETIVO
+# ------------------------------------------------------
+
+modelo += pulp.lpSum(
+    costos[i][j] * x[(i, j)]
+    for i in centros
+    for j in hospitales
 )
-
-    # ------------------------------------------------------
-    # FUNCIÓN OBJETIVO
-    # ------------------------------------------------------
-
-    modelo += pulp.lpSum(
-        costos[i][j] * x[(i, j)]
-        for i in centros
-        for j in hospitales
-    )
 
     # ------------------------------------------------------
     # CAPACIDADES
