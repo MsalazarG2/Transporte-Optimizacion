@@ -244,16 +244,16 @@ if st.button(
     )
 
     # Variables
-    x = pulp.LpVariable.dicts(
-        "x",
-        [
-            (i, j)
-            for i in centros
-            for j in hospitales
-        ],
-        lowBound=0,
-        cat="Continuous"
-    )
+x = pulp.LpVariable.dicts(
+    "x",
+    [
+        (i, j)
+        for i in centros
+        for j in hospitales
+    ],
+    lowBound=0,
+    cat="Continuous"
+)
 
     # ------------------------------------------------------
     # FUNCIÓN OBJETIVO
