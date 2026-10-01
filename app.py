@@ -144,27 +144,20 @@ st.write(
 
 costos_df = pd.DataFrame(
     [
-        [8.0, 12.0, 15.0, 11.0],
-        [14.0, 10.0, 9.0, 16.0],
-        [11.0, 13.0, 14.0, 8.0]
+        [8, 12, 15, 11],
+        [14, 10, 9, 16],
+        [11, 13, 14, 8]
     ],
     index=centros,
-    columns=hospitales
+    columns=hospitales,
+    dtype=int
 )
 
 costos_editados = st.data_editor(
     costos_df,
     use_container_width=True,
     num_rows="fixed",
-    column_config={
-        hospital: st.column_config.NumberColumn(
-            hospital,
-            min_value=0,
-            step=1,
-            format="%.0f"
-        )
-        for hospital in hospitales
-    }
+    hide_index=False
 )
 
 costos = {
@@ -174,8 +167,6 @@ costos = {
     }
     for centro in centros
 }
-
-
 # ==========================================================
 # RESTRICCIÓN ESPECIAL
 # ==========================================================
