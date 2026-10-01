@@ -156,8 +156,15 @@ costos_editados = st.data_editor(
     costos_df,
     use_container_width=True,
     num_rows="fixed",
-    min_value=0.0,
-    step=1.0
+    column_config={
+        hospital: st.column_config.NumberColumn(
+            hospital,
+            min_value=0,
+            step=1,
+            format="%.0f"
+        )
+        for hospital in hospitales
+    }
 )
 
 costos = {
